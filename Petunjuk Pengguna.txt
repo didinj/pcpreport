@@ -1,0 +1,29 @@
+INSTALASI
+------------------------------------------------------------------
+1. Buka CD lalu double klik jre-7u17-windows-i586.exe
+2. Klik install
+3. Tunggu sampai proses install selesai lalu klik Close
+4. Copy semua Folder Dist ke local disk C:\
+5. Buka local disk C:\ dan folder dist yg telah di copy tersebut
+6. Klik kanan mouse pada file Pcpreports lalu pilih sendto --> Desktop(create shortcut)
+7. Jalankan Pcpreports yg ada di desktop
+
+CARA MENGGUNAKAN
+------------------------------------------------------------------
+A. TARIK DATA
+
+1. Buka Pcpreport
+2. Masukan SDCARD dari Alat PCP ke CARDREADER ke Komputer
+3. Lihat SDCARD terbaca sebagai drive apa (contoh: D atau E atau F atau lainnya)
+4. Di program PCPReport pilih Drive sesuai dengan terbaca nya drive SDCARD (misal: F:/)
+5. Klik Tarik Data lalu tunggu sampai penarikan data selesai
+
+B. LIHAT REPORT
+
+1. Pilih Tanggal Mulai dan tanggal akhir
+2. Klik Proses Report dan tunggu sampai selesai
+3. Klik Lihat Report
+4. Untuk melihat data hari sekarang tinggal di klik Data Hari ini
+5. Untuk sortir data tinggal di klik judul tabel nya (misal: klik judul NIK untuk sortir berdasarkan NIK)
+6. Untuk pencarian tinggal pilih kolomnya, lalu masukan nilai pencariannya lalu klik cari
+7. Untuk mengolah dari Microsoft Excel klik Export ke Excel dan lihat pesan yg muncul file excelnya di simpan di mana
