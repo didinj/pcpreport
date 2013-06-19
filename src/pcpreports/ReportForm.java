@@ -307,7 +307,7 @@ public class ReportForm extends javax.swing.JDialog {
 
     public void fillData(JTable table, File file) {
         DateFormat datefmt = new SimpleDateFormat("dd/MM/yyyy");
-        DateFormat timefmt = new SimpleDateFormat("hh:mm");
+        DateFormat timefmt = new SimpleDateFormat("HH:mm");
         try {
 
             WritableWorkbook workbook1 = Workbook.createWorkbook(file);
