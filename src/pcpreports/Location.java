@@ -16,6 +16,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Location.findByLoccode", query = "SELECT l FROM Location l WHERE l.loccode = :loccode"),
     @NamedQuery(name = "Location.findByLocname", query = "SELECT l FROM Location l WHERE l.locname = :locname"),
     @NamedQuery(name = "Location.findByLocunit", query = "SELECT l FROM Location l WHERE l.locunit = :locunit"),
+    @NamedQuery(name = "Location.findByLocsubunit", query = "SELECT l FROM Location l WHERE l.locsubunit = :locsubunit"),
     @NamedQuery(name = "Location.findByLocrfid", query = "SELECT l FROM Location l WHERE l.locrfid = :locrfid")})
 public class Location implements Serializable {
 
@@ -28,6 +29,8 @@ public class Location implements Serializable {
     private String locname;
     @Column(name = "LOCUNIT")
     private String locunit;
+    @Column(name = "LOCSUBUNIT")
+    private String locsubunit;
     @Column(name = "LOCRFID")
     private String locrfid;
 
@@ -38,10 +41,11 @@ public class Location implements Serializable {
         this.loccode = loccode;
     }
 
-    public Location(String loccode, String locname, String locunit, String locrfid) {
+    public Location(String loccode, String locname, String locunit, String locsubunit, String locrfid) {
         this.loccode = loccode;
         this.locname = locname;
         this.locunit = locunit;
+        this.locsubunit = locsubunit;
         this.locrfid = locrfid;
     }
 
@@ -67,6 +71,14 @@ public class Location implements Serializable {
 
     public void setLocunit(String locunit) {
         this.locunit = locunit;
+    }
+
+    public String getLocsubunit() {
+        return locsubunit;
+    }
+
+    public void setLocsubunit(String locsubunit) {
+        this.locsubunit = locsubunit;
     }
 
     public String getLocrfid() {

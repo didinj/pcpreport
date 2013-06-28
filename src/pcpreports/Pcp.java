@@ -21,6 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Pcp.findAll", query = "SELECT p FROM Pcp p"),
     @NamedQuery(name = "Pcp.findById", query = "SELECT p FROM Pcp p WHERE p.id = :id"),
+    @NamedQuery(name = "Pcp.findByUnitcode", query = "SELECT p FROM Pcp p WHERE p.unitcode = :unitcode"),
     @NamedQuery(name = "Pcp.findByNik", query = "SELECT p FROM Pcp p WHERE p.nik = :nik"),
     @NamedQuery(name = "Pcp.findByTgl", query = "SELECT p FROM Pcp p WHERE p.tgl = :tgl"),
     @NamedQuery(name = "Pcp.findByJam", query = "SELECT p FROM Pcp p WHERE p.jam = :jam"),
@@ -34,6 +35,8 @@ public class Pcp implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
+    @Column(name = "UNITCODE")
+    private String unitcode;
     @Basic(optional = false)
     @Column(name = "NIK")
     private String nik;
@@ -49,13 +52,21 @@ public class Pcp implements Serializable {
     public Pcp() {
     }
 
-    public Pcp(Integer id) {
+    public Pcp(Integer id, String unitcode, String nik, Date tgl, Date jam, String lok) {
         this.id = id;
+        this.unitcode = unitcode;
+        this.nik = nik;
+        this.tgl = tgl;
+        this.jam = jam;
+        this.lok = lok;
     }
 
-    public Pcp(Integer id, String nik) {
-        this.id = id;
-        this.nik = nik;
+    public PropertyChangeSupport getChangeSupport() {
+        return changeSupport;
+    }
+
+    public void setChangeSupport(PropertyChangeSupport changeSupport) {
+        this.changeSupport = changeSupport;
     }
 
     public Integer getId() {
@@ -63,29 +74,7 @@ public class Pcp implements Serializable {
     }
 
     public void setId(Integer id) {
-        Integer oldId = this.id;
         this.id = id;
-        changeSupport.firePropertyChange("id", oldId, id);
-    }
-
-    public String getNik() {
-        return nik;
-    }
-
-    public void setNik(String nik) {
-        String oldNik = this.nik;
-        this.nik = nik;
-        changeSupport.firePropertyChange("nik", oldNik, nik);
-    }
-
-    public Date getTgl() {
-        return tgl;
-    }
-
-    public void setTgl(Date tgl) {
-        Date oldTgl = this.tgl;
-        this.tgl = tgl;
-        changeSupport.firePropertyChange("tgl", oldTgl, tgl);
     }
 
     public Date getJam() {
@@ -93,9 +82,7 @@ public class Pcp implements Serializable {
     }
 
     public void setJam(Date jam) {
-        Date oldJam = this.jam;
         this.jam = jam;
-        changeSupport.firePropertyChange("jam", oldJam, jam);
     }
 
     public String getLok() {
@@ -103,42 +90,31 @@ public class Pcp implements Serializable {
     }
 
     public void setLok(String lok) {
-        String oldLok = this.lok;
         this.lok = lok;
-        changeSupport.firePropertyChange("lok", oldLok, lok);
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
+    public String getNik() {
+        return nik;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Pcp)) {
-            return false;
-        }
-        Pcp other = (Pcp) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public void setNik(String nik) {
+        this.nik = nik;
     }
 
-    @Override
-    public String toString() {
-        return "pcpreports.Pcp[ id=" + id + " ]";
+    public Date getTgl() {
+        return tgl;
     }
 
-    public void addPropertyChangeListener(PropertyChangeListener listener) {
-        changeSupport.addPropertyChangeListener(listener);
+    public void setTgl(Date tgl) {
+        this.tgl = tgl;
     }
 
-    public void removePropertyChangeListener(PropertyChangeListener listener) {
-        changeSupport.removePropertyChangeListener(listener);
+    public String getUnitcode() {
+        return unitcode;
     }
-    
+
+    public void setUnitcode(String unitcode) {
+        this.unitcode = unitcode;
+    }
+   
 }

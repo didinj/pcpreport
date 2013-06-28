@@ -23,7 +23,7 @@ public class EmployeeForm extends javax.swing.JDialog implements SerialPortEvent
         initComponents();
         if (!Beans.isDesignTime()) {
             entityManager.getTransaction().begin();
-//            initSerial();
+            initSerial();
         }
     }
 
@@ -338,7 +338,7 @@ public class EmployeeForm extends javax.swing.JDialog implements SerialPortEvent
 
     private void initSerial() {
         try {
-            connect("COM3");
+            connect("COM4");
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

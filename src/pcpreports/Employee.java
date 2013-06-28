@@ -4,6 +4,8 @@
  */
 package pcpreports;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -22,8 +24,12 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Employee.findByJabatan", query = "SELECT e FROM Employee e WHERE e.jabatan = :jabatan"),
     @NamedQuery(name = "Employee.findByRegu", query = "SELECT e FROM Employee e WHERE e.regu = :regu"),
     @NamedQuery(name = "Employee.findByUnit", query = "SELECT e FROM Employee e WHERE e.unit = :unit"),
+    @NamedQuery(name = "Employee.findBySubunit", query = "SELECT e FROM Employee e WHERE e.subunit = :subunit"),
     @NamedQuery(name = "Employee.findByRfid", query = "SELECT e FROM Employee e WHERE e.rfid = :rfid")})
 public class Employee implements Serializable {
+    @Transient
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -38,35 +44,22 @@ public class Employee implements Serializable {
     private Integer regu;
     @Column(name = "UNIT")
     private String unit;
+    @Column(name = "SUBUNIT")
+    private String subunit;
     @Column(name = "RFID")
     private String rfid;
 
     public Employee() {
     }
 
-    public Employee(String nik) {
-        this.nik = nik;
-    }
-
-    public Employee(String nik, String nama) {
+    public Employee(String nik, String nama, String jabatan, Integer regu, String unit, String subunit, String rfid) {
         this.nik = nik;
         this.nama = nama;
-    }
-
-    public String getNik() {
-        return nik;
-    }
-
-    public void setNik(String nik) {
-        this.nik = nik;
-    }
-
-    public String getNama() {
-        return nama;
-    }
-
-    public void setNama(String nama) {
-        this.nama = nama;
+        this.jabatan = jabatan;
+        this.regu = regu;
+        this.unit = unit;
+        this.subunit = subunit;
+        this.rfid = rfid;
     }
 
     public String getJabatan() {
@@ -74,7 +67,29 @@ public class Employee implements Serializable {
     }
 
     public void setJabatan(String jabatan) {
+        String oldJabatan = this.jabatan;
         this.jabatan = jabatan;
+        changeSupport.firePropertyChange("jabatan", oldJabatan, jabatan);
+    }
+
+    public String getNama() {
+        return nama;
+    }
+
+    public void setNama(String nama) {
+        String oldNama = this.nama;
+        this.nama = nama;
+        changeSupport.firePropertyChange("nama", oldNama, nama);
+    }
+
+    public String getNik() {
+        return nik;
+    }
+
+    public void setNik(String nik) {
+        String oldNik = this.nik;
+        this.nik = nik;
+        changeSupport.firePropertyChange("nik", oldNik, nik);
     }
 
     public Integer getRegu() {
@@ -82,15 +97,9 @@ public class Employee implements Serializable {
     }
 
     public void setRegu(Integer regu) {
+        Integer oldRegu = this.regu;
         this.regu = regu;
-    }
-
-    public String getUnit() {
-        return unit;
-    }
-
-    public void setUnit(String unit) {
-        this.unit = unit;
+        changeSupport.firePropertyChange("regu", oldRegu, regu);
     }
 
     public String getRfid() {
@@ -98,32 +107,36 @@ public class Employee implements Serializable {
     }
 
     public void setRfid(String rfid) {
+        String oldRfid = this.rfid;
         this.rfid = rfid;
+        changeSupport.firePropertyChange("rfid", oldRfid, rfid);
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (nik != null ? nik.hashCode() : 0);
-        return hash;
+    public String getSubunit() {
+        return subunit;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Employee)) {
-            return false;
-        }
-        Employee other = (Employee) object;
-        if ((this.nik == null && other.nik != null) || (this.nik != null && !this.nik.equals(other.nik))) {
-            return false;
-        }
-        return true;
+    public void setSubunit(String subunit) {
+        String oldSubunit = this.subunit;
+        this.subunit = subunit;
+        changeSupport.firePropertyChange("subunit", oldSubunit, subunit);
     }
 
-    @Override
-    public String toString() {
-        return "pcpreports.Employee[ nik=" + nik + " ]";
+    public String getUnit() {
+        return unit;
     }
-    
+
+    public void setUnit(String unit) {
+        String oldUnit = this.unit;
+        this.unit = unit;
+        changeSupport.firePropertyChange("unit", oldUnit, unit);
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.removePropertyChangeListener(listener);
+    }
 }

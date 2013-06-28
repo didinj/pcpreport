@@ -288,7 +288,7 @@ public class PcpForm extends javax.swing.JFrame {
         setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         getdatafromsd();
 //        saveData();
-//        putnik();
+        putdatatosd();
         setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -546,10 +546,12 @@ public class PcpForm extends javax.swing.JFrame {
         }
     }
 
-    private void putnik() {
+    private void putdatatosd() {
         EntityManager em = emf.createEntityManager();
-        Query query = em.createQuery("SELECT e.nik FROM Employee e");
+        Query query = em.createQuery("SELECT e FROM Employee e");
         List<Employee> emplist = query.getResultList();
+        Query query2 = em.createQuery("SELECT l FROM Location l");
+        List<Location> loclist = query2.getResultList();
         File oldfile = new File(driveCombo.getSelectedItem().toString().trim(), "empfile.txt");
         if (oldfile.exists()) {
             oldfile.delete();
@@ -558,8 +560,18 @@ public class PcpForm extends javax.swing.JFrame {
                 Writer writer = new BufferedWriter(new FileWriter(newfile));
                 Iterator it = emplist.iterator();
                 while (it.hasNext()) {
-                    writer.append("" + it.next() + "");
+                    Employee emp = (Employee) it.next();
+                    writer.append("" + emp.getRfid() + "" + emp.getNik() + "");
                     if (it.hasNext()) {
+                        writer.append(",");
+                    }
+                }
+                writer.append(",");
+                Iterator it2 = loclist.iterator();
+                while (it2.hasNext()) {
+                    Location loc = (Location) it2.next();
+                    writer.append("" + loc.getLoccode() + "" + loc.getLocrfid() + "");
+                    if (it2.hasNext()) {
                         writer.append(",");
                     }
                 }
@@ -574,8 +586,18 @@ public class PcpForm extends javax.swing.JFrame {
                 Writer writer = new BufferedWriter(new FileWriter(oldfile));
                 Iterator it = emplist.iterator();
                 while (it.hasNext()) {
-                    writer.append("" + it.next() + "");
+                    Employee emp = (Employee) it.next();
+                    writer.append("" + emp.getRfid() + "" + emp.getNik() + "");
                     if (it.hasNext()) {
+                        writer.append(",");
+                    }
+                }
+                Iterator it2 = loclist.iterator();
+                writer.append(",");
+                while (it2.hasNext()) {
+                    Location loc = (Location) it2.next();
+                    writer.append("" + loc.getLocrfid() + "" + loc.getLoccode() + "");
+                    if (it2.hasNext()) {
                         writer.append(",");
                     }
                 }
