@@ -54,34 +54,38 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" alignment="0" pref="0" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="nikLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="namaLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="unitLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="unitLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="rfidLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="2" attributes="0">
+                          <Component id="unitCombo" alignment="2" max="32767" attributes="0"/>
+                          <Component id="subunitCombo" alignment="2" max="32767" attributes="0"/>
+                          <Component id="loccodeCombo" alignment="2" max="32767" attributes="0"/>
+                          <Component id="locnameText" alignment="2" pref="435" max="32767" attributes="0"/>
+                          <Component id="locrfidField" alignment="2" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="300" max="32767" attributes="0"/>
                       <Component id="newButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="deleteButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="saveButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="nikLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="namaLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="unitLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="rfidLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="unitLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="jScrollPane1" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="locsubunitField" max="32767" attributes="0"/>
-                          <Component id="locrfidField" max="32767" attributes="0"/>
-                          <Component id="locunitField" max="32767" attributes="0"/>
-                          <Component id="loccodeText" alignment="0" pref="435" max="32767" attributes="0"/>
-                          <Component id="locnameText" alignment="0" pref="435" max="32767" attributes="0"/>
-                      </Group>
                   </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -92,8 +96,18 @@
               <Component id="jScrollPane1" min="-2" pref="188" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="unitLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="unitCombo" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="unitLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="subunitCombo" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="nikLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="loccodeText" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="loccodeCombo" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -102,26 +116,16 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="unitLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="locunitField" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="unitLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="locsubunitField" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="rfidLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="locrfidField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="saveButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="deleteButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="newButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="39" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -194,6 +198,9 @@
               </Subbinding>
             </BindingProperty>
           </BindingProperties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="locationTableMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -201,13 +208,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Loc Code"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="loccodeText">
-      <BindingProperties>
-        <BindingProperty name="text" source="locationTable" sourcePath="${selectedElement.loccode}" target="loccodeText" targetPath="text" updateStrategy="0" immediately="false">
-          <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
-        </BindingProperty>
-      </BindingProperties>
     </Component>
     <Component class="javax.swing.JLabel" name="namaLabel">
       <Properties>
@@ -225,13 +225,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Unit"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="locunitField">
-      <BindingProperties>
-        <BindingProperty name="text" source="locationTable" sourcePath="${selectedElement.locunit}" target="locunitField" targetPath="text" updateStrategy="0" immediately="false">
-          <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
-        </BindingProperty>
-      </BindingProperties>
     </Component>
     <Component class="javax.swing.JLabel" name="rfidLabel">
       <Properties>
@@ -263,6 +256,7 @@
     <Component class="javax.swing.JButton" name="deleteButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Delete"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteButtonActionPerformed"/>
@@ -275,6 +269,7 @@
     <Component class="javax.swing.JButton" name="saveButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Save"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveButtonActionPerformed"/>
@@ -289,7 +284,120 @@
         <Property name="text" type="java.lang.String" value="Subunit"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="locsubunitField">
+    <Component class="javax.swing.JComboBox" name="loccodeCombo">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="20">
+            <StringItem index="0" value="L01"/>
+            <StringItem index="1" value="L02"/>
+            <StringItem index="2" value="L03"/>
+            <StringItem index="3" value="L04"/>
+            <StringItem index="4" value="L05"/>
+            <StringItem index="5" value="L06"/>
+            <StringItem index="6" value="L07"/>
+            <StringItem index="7" value="L08"/>
+            <StringItem index="8" value="L09"/>
+            <StringItem index="9" value="L10"/>
+            <StringItem index="10" value="L11"/>
+            <StringItem index="11" value="L12"/>
+            <StringItem index="12" value="L13"/>
+            <StringItem index="13" value="L14"/>
+            <StringItem index="14" value="L15"/>
+            <StringItem index="15" value="L16"/>
+            <StringItem index="16" value="L17"/>
+            <StringItem index="17" value="L18"/>
+            <StringItem index="18" value="L19"/>
+            <StringItem index="19" value="L20"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <BindingProperties>
+        <BindingProperty name="selectedItem" source="locationTable" sourcePath="${selectedElement.loccode}" target="loccodeCombo" targetPath="selectedItem" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="unitCombo">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="35">
+            <StringItem index="0" value="001"/>
+            <StringItem index="1" value="002"/>
+            <StringItem index="2" value="003"/>
+            <StringItem index="3" value="004"/>
+            <StringItem index="4" value="005"/>
+            <StringItem index="5" value="006"/>
+            <StringItem index="6" value="007"/>
+            <StringItem index="7" value="008"/>
+            <StringItem index="8" value="009"/>
+            <StringItem index="9" value="010"/>
+            <StringItem index="10" value="011"/>
+            <StringItem index="11" value="012"/>
+            <StringItem index="12" value="013"/>
+            <StringItem index="13" value="014"/>
+            <StringItem index="14" value="015"/>
+            <StringItem index="15" value="016"/>
+            <StringItem index="16" value="017"/>
+            <StringItem index="17" value="018"/>
+            <StringItem index="18" value="019"/>
+            <StringItem index="19" value="020"/>
+            <StringItem index="20" value="021"/>
+            <StringItem index="21" value="022"/>
+            <StringItem index="22" value="023"/>
+            <StringItem index="23" value="024"/>
+            <StringItem index="24" value="025"/>
+            <StringItem index="25" value="026"/>
+            <StringItem index="26" value="027"/>
+            <StringItem index="27" value="028"/>
+            <StringItem index="28" value="029"/>
+            <StringItem index="29" value="030"/>
+            <StringItem index="30" value="031"/>
+            <StringItem index="31" value="032"/>
+            <StringItem index="32" value="033"/>
+            <StringItem index="33" value="034"/>
+            <StringItem index="34" value="035"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <BindingProperties>
+        <BindingProperty name="selectedItem" source="locationTable" sourcePath="${selectedElement.locunit}" target="unitCombo" targetPath="selectedItem" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="subunitCombo">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="27">
+            <StringItem index="0" value="-"/>
+            <StringItem index="1" value="A"/>
+            <StringItem index="2" value="B"/>
+            <StringItem index="3" value="C"/>
+            <StringItem index="4" value="D"/>
+            <StringItem index="5" value="E"/>
+            <StringItem index="6" value="F"/>
+            <StringItem index="7" value="G"/>
+            <StringItem index="8" value="H"/>
+            <StringItem index="9" value="I"/>
+            <StringItem index="10" value="J"/>
+            <StringItem index="11" value="K"/>
+            <StringItem index="12" value="L"/>
+            <StringItem index="13" value="M"/>
+            <StringItem index="14" value="N"/>
+            <StringItem index="15" value="O"/>
+            <StringItem index="16" value="P"/>
+            <StringItem index="17" value="Q"/>
+            <StringItem index="18" value="R"/>
+            <StringItem index="19" value="S"/>
+            <StringItem index="20" value="T"/>
+            <StringItem index="21" value="U"/>
+            <StringItem index="22" value="V"/>
+            <StringItem index="23" value="W"/>
+            <StringItem index="24" value="X"/>
+            <StringItem index="25" value="Y"/>
+            <StringItem index="26" value="Z"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <BindingProperties>
+        <BindingProperty name="selectedItem" source="locationTable" sourcePath="${selectedElement.locsubunit}" target="subunitCombo" targetPath="selectedItem" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
     </Component>
   </SubComponents>
 </Form>

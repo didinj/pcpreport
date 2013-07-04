@@ -47,9 +47,6 @@
     <SyntheticProperty name="generateSize" type="boolean" value="false"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
   </SyntheticProperties>
-  <Events>
-    <EventHandler event="windowClosed" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowClosed"/>
-  </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -73,8 +70,6 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="deleteButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="refreshButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="saveButton" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
@@ -88,20 +83,35 @@
                                   <Component id="reguLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="unitLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="nikField" alignment="0" pref="333" max="32767" attributes="0"/>
-                                  <Component id="namaField" alignment="0" pref="333" max="32767" attributes="0"/>
-                                  <Component id="jabatanField" alignment="0" pref="333" max="32767" attributes="0"/>
-                                  <Component id="reguField" alignment="0" pref="333" max="32767" attributes="0"/>
-                                  <Component id="unitField" alignment="0" pref="333" max="32767" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                                      <Component id="unitCombo" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="nikField" alignment="0" pref="418" max="32767" attributes="0"/>
+                                          <Component id="namaField" alignment="0" pref="418" max="32767" attributes="0"/>
+                                          <Component id="jabatanCombo" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="reguCombo" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
-                          <Component id="masterScrollPane" alignment="0" pref="380" max="32767" attributes="0"/>
+                          <Component id="masterScrollPane" alignment="0" pref="465" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="rfidLabel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                               <Component id="rfidField" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="subunitCombo" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -115,6 +125,16 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="masterScrollPane" min="-2" pref="171" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="unitLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="unitCombo" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="subunitCombo" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="nikLabel" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -128,31 +148,25 @@
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jabatanLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jabatanField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jabatanCombo" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="reguLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="reguField" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="unitLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="unitField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="reguCombo" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="rfidLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="rfidField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="19" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="saveButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="refreshButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="deleteButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="newButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="37" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -199,6 +213,11 @@
                   <Editor/>
                   <Renderer/>
                 </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
               </TableColumnModel>
             </Property>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
@@ -208,6 +227,14 @@
           <BindingProperties>
             <BindingProperty name="elements" source="list" target="masterTable" targetPath="elements" updateStrategy="0" immediately="true">
               <Property name="name" type="java.lang.String" value=""/>
+              <Subbinding sourcePath="${unit}">
+                <BindingParameter name="NAME" value="Unit"/>
+                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
+              </Subbinding>
+              <Subbinding sourcePath="${subunit}">
+                <BindingParameter name="NAME" value="Sub Unit"/>
+                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
+              </Subbinding>
               <Subbinding sourcePath="${nik}">
                 <BindingParameter name="NAME" value="Nik"/>
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
@@ -224,16 +251,15 @@
                 <BindingParameter name="NAME" value="Regu"/>
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Integer.class"/>
               </Subbinding>
-              <Subbinding sourcePath="${unit}">
-                <BindingParameter name="NAME" value="Unit"/>
-                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
-              </Subbinding>
               <Subbinding sourcePath="${rfid}">
                 <BindingParameter name="NAME" value="RFID"/>
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
               </Subbinding>
             </BindingProperty>
           </BindingProperties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="masterTableMouseClicked"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="false"/>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="2"/>
@@ -280,45 +306,13 @@
         </BindingProperty>
       </BindingProperties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jabatanField">
-      <BindingProperties>
-        <BindingProperty name="text" source="masterTable" sourcePath="${selectedElement.jabatan}" target="jabatanField" targetPath="text" updateStrategy="0" immediately="false">
-          <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
-        </BindingProperty>
-      </BindingProperties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="reguField">
-      <BindingProperties>
-        <BindingProperty name="text" source="masterTable" sourcePath="${selectedElement.regu}" target="reguField" targetPath="text" updateStrategy="0" immediately="false">
-          <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
-        </BindingProperty>
-      </BindingProperties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="unitField">
-      <BindingProperties>
-        <BindingProperty name="text" source="masterTable" sourcePath="${selectedElement.unit}" target="unitField" targetPath="text" updateStrategy="0" immediately="false">
-          <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
-        </BindingProperty>
-      </BindingProperties>
-    </Component>
     <Component class="javax.swing.JButton" name="saveButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Save"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveButtonActionPerformed"/>
-      </Events>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="false"/>
-        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="2"/>
-      </AuxValues>
-    </Component>
-    <Component class="javax.swing.JButton" name="refreshButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Refresh"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="refreshButtonActionPerformed"/>
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="false"/>
@@ -340,6 +334,7 @@
     <Component class="javax.swing.JButton" name="deleteButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Delete"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteButtonActionPerformed"/>
@@ -363,6 +358,128 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
       </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Subunit"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="subunitCombo">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="27">
+            <StringItem index="0" value="-"/>
+            <StringItem index="1" value="A"/>
+            <StringItem index="2" value="B"/>
+            <StringItem index="3" value="C"/>
+            <StringItem index="4" value="D"/>
+            <StringItem index="5" value="E"/>
+            <StringItem index="6" value="F"/>
+            <StringItem index="7" value="G"/>
+            <StringItem index="8" value="H"/>
+            <StringItem index="9" value="I"/>
+            <StringItem index="10" value="J"/>
+            <StringItem index="11" value="K"/>
+            <StringItem index="12" value="L"/>
+            <StringItem index="13" value="M"/>
+            <StringItem index="14" value="N"/>
+            <StringItem index="15" value="O"/>
+            <StringItem index="16" value="P"/>
+            <StringItem index="17" value="Q"/>
+            <StringItem index="18" value="R"/>
+            <StringItem index="19" value="S"/>
+            <StringItem index="20" value="T"/>
+            <StringItem index="21" value="U"/>
+            <StringItem index="22" value="V"/>
+            <StringItem index="23" value="W"/>
+            <StringItem index="24" value="X"/>
+            <StringItem index="25" value="Y"/>
+            <StringItem index="26" value="Z"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <BindingProperties>
+        <BindingProperty name="selectedItem" source="masterTable" sourcePath="${selectedElement.subunit}" target="subunitCombo" targetPath="selectedItem" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="unitCombo">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="35">
+            <StringItem index="0" value="001"/>
+            <StringItem index="1" value="002"/>
+            <StringItem index="2" value="003"/>
+            <StringItem index="3" value="004"/>
+            <StringItem index="4" value="005"/>
+            <StringItem index="5" value="006"/>
+            <StringItem index="6" value="007"/>
+            <StringItem index="7" value="008"/>
+            <StringItem index="8" value="009"/>
+            <StringItem index="9" value="010"/>
+            <StringItem index="10" value="011"/>
+            <StringItem index="11" value="012"/>
+            <StringItem index="12" value="013"/>
+            <StringItem index="13" value="014"/>
+            <StringItem index="14" value="015"/>
+            <StringItem index="15" value="016"/>
+            <StringItem index="16" value="017"/>
+            <StringItem index="17" value="018"/>
+            <StringItem index="18" value="019"/>
+            <StringItem index="19" value="020"/>
+            <StringItem index="20" value="021"/>
+            <StringItem index="21" value="022"/>
+            <StringItem index="22" value="023"/>
+            <StringItem index="23" value="024"/>
+            <StringItem index="24" value="025"/>
+            <StringItem index="25" value="026"/>
+            <StringItem index="26" value="027"/>
+            <StringItem index="27" value="028"/>
+            <StringItem index="28" value="029"/>
+            <StringItem index="29" value="030"/>
+            <StringItem index="30" value="031"/>
+            <StringItem index="31" value="032"/>
+            <StringItem index="32" value="033"/>
+            <StringItem index="33" value="034"/>
+            <StringItem index="34" value="035"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <BindingProperties>
+        <BindingProperty name="selectedItem" source="masterTable" sourcePath="${selectedElement.unit}" target="unitCombo" targetPath="selectedItem" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="jabatanCombo">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="7">
+            <StringItem index="0" value="ANGGOTA"/>
+            <StringItem index="1" value="WADANRU"/>
+            <StringItem index="2" value="DANRU"/>
+            <StringItem index="3" value="WADANUNIT"/>
+            <StringItem index="4" value="DANUNIT"/>
+            <StringItem index="5" value="WADANSEKTOR"/>
+            <StringItem index="6" value="DANSEKTOR"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <BindingProperties>
+        <BindingProperty name="selectedItem" source="masterTable" sourcePath="${selectedElement.jabatan}" target="jabatanCombo" targetPath="selectedItem" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="reguCombo">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="4">
+            <StringItem index="0" value="1"/>
+            <StringItem index="1" value="2"/>
+            <StringItem index="2" value="3"/>
+            <StringItem index="3" value="4"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <BindingProperties>
+        <BindingProperty name="selectedItem" source="masterTable" sourcePath="${selectedElement.regu}" target="reguCombo" targetPath="selectedItem" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
     </Component>
   </SubComponents>
 </Form>

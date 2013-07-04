@@ -52,6 +52,7 @@ public class SubunitForm extends javax.swing.JDialog {
         jComboBox1 = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("SUB UNIT");
         setLocationByPlatform(true);
 
         org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, subunitList, subTable, "");
@@ -66,6 +67,11 @@ public class SubunitForm extends javax.swing.JDialog {
         columnBinding.setColumnClass(String.class);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
+        subTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                subTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(subTable);
 
         jLabel1.setText("Unit");
@@ -85,6 +91,7 @@ public class SubunitForm extends javax.swing.JDialog {
         });
 
         deleteButton.setText("Delete");
+        deleteButton.setEnabled(false);
         deleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteButtonActionPerformed(evt);
@@ -92,6 +99,7 @@ public class SubunitForm extends javax.swing.JDialog {
         });
 
         saveButton.setText("Save");
+        saveButton.setEnabled(false);
         saveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveButtonActionPerformed(evt);
@@ -103,7 +111,7 @@ public class SubunitForm extends javax.swing.JDialog {
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, subTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.unitcode}"), unitCombo, org.jdesktop.beansbinding.BeanProperty.create("selectedItem"));
         bindingGroup.addBinding(binding);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "000", "001", "002", "003", "004", "005", "006", "007", "008", "009", "010", "011", "012", "013", "014", "015", "016", "017", "018", "019", "020", "021", "022", "023", "024", "025", "026", "027", "028", "029", "030", "031", "032", "033", "034", "035" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" }));
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, subTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.subunitcode}"), jComboBox1, org.jdesktop.beansbinding.BeanProperty.create("selectedItem"));
         bindingGroup.addBinding(binding);
@@ -159,13 +167,13 @@ public class SubunitForm extends javax.swing.JDialog {
                     .addComponent(saveButton)
                     .addComponent(deleteButton)
                     .addComponent(newButton))
-                .addContainerGap(73, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         bindingGroup.bind();
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-396)/2, (screenSize.height-462)/2, 396, 462);
+        setBounds((screenSize.width-396)/2, (screenSize.height-433)/2, 396, 433);
     }// </editor-fold>//GEN-END:initComponents
 
     private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
@@ -176,6 +184,7 @@ public class SubunitForm extends javax.swing.JDialog {
         subTable.setRowSelectionInterval(row, row);
         subTable.scrollRectToVisible(subTable.getCellRect(row, 0, true));
         unitCombo.requestFocusInWindow();
+        saveButton.setEnabled(true);
     }//GEN-LAST:event_newButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
@@ -189,6 +198,8 @@ public class SubunitForm extends javax.swing.JDialog {
         subunitList.removeAll(toRemove);
 
         refreshData();
+        saveButton.setEnabled(false);
+        deleteButton.setEnabled(false);
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
@@ -207,7 +218,14 @@ public class SubunitForm extends javax.swing.JDialog {
         }
 
         refreshData();
+        saveButton.setEnabled(false);
+        deleteButton.setEnabled(false);
     }//GEN-LAST:event_saveButtonActionPerformed
+
+    private void subTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_subTableMouseClicked
+        saveButton.setEnabled(true);
+        deleteButton.setEnabled(true);
+    }//GEN-LAST:event_subTableMouseClicked
 
     private void refreshData() {
         subem.getTransaction().rollback();

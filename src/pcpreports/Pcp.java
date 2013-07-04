@@ -22,11 +22,13 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Pcp.findAll", query = "SELECT p FROM Pcp p"),
     @NamedQuery(name = "Pcp.findById", query = "SELECT p FROM Pcp p WHERE p.id = :id"),
     @NamedQuery(name = "Pcp.findByUnitcode", query = "SELECT p FROM Pcp p WHERE p.unitcode = :unitcode"),
+    @NamedQuery(name = "Pcp.findBySubunit", query = "SELECT p FROM Pcp p WHERE p.subunit = :subunit"),
     @NamedQuery(name = "Pcp.findByNik", query = "SELECT p FROM Pcp p WHERE p.nik = :nik"),
     @NamedQuery(name = "Pcp.findByTgl", query = "SELECT p FROM Pcp p WHERE p.tgl = :tgl"),
     @NamedQuery(name = "Pcp.findByJam", query = "SELECT p FROM Pcp p WHERE p.jam = :jam"),
     @NamedQuery(name = "Pcp.findByLok", query = "SELECT p FROM Pcp p WHERE p.lok = :lok")})
 public class Pcp implements Serializable {
+
     @Transient
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
@@ -37,6 +39,8 @@ public class Pcp implements Serializable {
     private Integer id;
     @Column(name = "UNITCODE")
     private String unitcode;
+    @Column(name = "SUBUNIT")
+    private String subunit;
     @Basic(optional = false)
     @Column(name = "NIK")
     private String nik;
@@ -52,9 +56,9 @@ public class Pcp implements Serializable {
     public Pcp() {
     }
 
-    public Pcp(Integer id, String unitcode, String nik, Date tgl, Date jam, String lok) {
-        this.id = id;
+    public Pcp(String unitcode, String subunit, String nik, Date tgl, Date jam, String lok) {
         this.unitcode = unitcode;
+        this.subunit = subunit;
         this.nik = nik;
         this.tgl = tgl;
         this.jam = jam;
@@ -116,5 +120,13 @@ public class Pcp implements Serializable {
     public void setUnitcode(String unitcode) {
         this.unitcode = unitcode;
     }
-   
+
+    public String getSubunit() {
+        return subunit;
+    }
+
+    public void setSubunit(String subunit) {
+        this.subunit = subunit;
+    }
+    
 }

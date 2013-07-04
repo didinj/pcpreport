@@ -9,6 +9,7 @@
     <class>pcpreports.Report</class>
     <class>pcpreports.Subunit</class>
     <class>pcpreports.Units</class>
+    <class>pcpreports.Setup</class>
     <properties>
       <property name="toplink.jdbc.user" value="app"/>
       <property name="toplink.jdbc.password" value="app"/>

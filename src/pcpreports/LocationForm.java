@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Query;
 import javax.persistence.RollbackException;
 
 /**
@@ -40,24 +41,24 @@ public class LocationForm extends javax.swing.JDialog {
     private void initComponents() {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
-        em = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("jdbc:derby:Pcpreport;create=true").createEntityManager();
+        em = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("PcpreportPU").createEntityManager();
         locquery = java.beans.Beans.isDesignTime() ? null : em.createQuery("SELECT l FROM Location l");
         loclist = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(locquery.getResultList());
         jScrollPane1 = new javax.swing.JScrollPane();
         locationTable = new javax.swing.JTable();
         nikLabel = new javax.swing.JLabel();
-        loccodeText = new javax.swing.JTextField();
         namaLabel = new javax.swing.JLabel();
         locnameText = new javax.swing.JTextField();
         unitLabel = new javax.swing.JLabel();
-        locunitField = new javax.swing.JTextField();
         rfidLabel = new javax.swing.JLabel();
         locrfidField = new javax.swing.JTextField();
         newButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
         saveButton = new javax.swing.JButton();
         unitLabel1 = new javax.swing.JLabel();
-        locsubunitField = new javax.swing.JTextField();
+        loccodeCombo = new javax.swing.JComboBox();
+        unitCombo = new javax.swing.JComboBox();
+        subunitCombo = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setLocationByPlatform(true);
@@ -80,23 +81,22 @@ public class LocationForm extends javax.swing.JDialog {
         columnBinding.setColumnClass(String.class);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
+        locationTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                locationTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(locationTable);
         locationTable.getColumnModel().getColumn(3).setResizable(false);
 
         nikLabel.setText("Loc Code");
 
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, locationTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.loccode}"), loccodeText, org.jdesktop.beansbinding.BeanProperty.create("text"));
-        bindingGroup.addBinding(binding);
-
         namaLabel.setText("Loc Name");
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, locationTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.locname}"), locnameText, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, locationTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.locname}"), locnameText, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
         unitLabel.setText("Unit");
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, locationTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.locunit}"), locunitField, org.jdesktop.beansbinding.BeanProperty.create("text"));
-        bindingGroup.addBinding(binding);
 
         rfidLabel.setText("RFID");
 
@@ -111,6 +111,7 @@ public class LocationForm extends javax.swing.JDialog {
         });
 
         deleteButton.setText("Delete");
+        deleteButton.setEnabled(false);
         deleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteButtonActionPerformed(evt);
@@ -118,6 +119,7 @@ public class LocationForm extends javax.swing.JDialog {
         });
 
         saveButton.setText("Save");
+        saveButton.setEnabled(false);
         saveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveButtonActionPerformed(evt);
@@ -126,6 +128,21 @@ public class LocationForm extends javax.swing.JDialog {
 
         unitLabel1.setText("Subunit");
 
+        loccodeCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "L01", "L02", "L03", "L04", "L05", "L06", "L07", "L08", "L09", "L10", "L11", "L12", "L13", "L14", "L15", "L16", "L17", "L18", "L19", "L20" }));
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, locationTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.loccode}"), loccodeCombo, org.jdesktop.beansbinding.BeanProperty.create("selectedItem"));
+        bindingGroup.addBinding(binding);
+
+        unitCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "001", "002", "003", "004", "005", "006", "007", "008", "009", "010", "011", "012", "013", "014", "015", "016", "017", "018", "019", "020", "021", "022", "023", "024", "025", "026", "027", "028", "029", "030", "031", "032", "033", "034", "035" }));
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, locationTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.locunit}"), unitCombo, org.jdesktop.beansbinding.BeanProperty.create("selectedItem"));
+        bindingGroup.addBinding(binding);
+
+        subunitCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" }));
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, locationTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.locsubunit}"), subunitCombo, org.jdesktop.beansbinding.BeanProperty.create("selectedItem"));
+        bindingGroup.addBinding(binding);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -133,29 +150,32 @@ public class LocationForm extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(newButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(deleteButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(saveButton))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(nikLabel)
                             .addComponent(namaLabel)
                             .addComponent(unitLabel)
-                            .addComponent(rfidLabel)
-                            .addComponent(unitLabel1))
+                            .addComponent(unitLabel1)
+                            .addComponent(rfidLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(locsubunitField)
-                            .addComponent(locrfidField)
-                            .addComponent(locunitField)
-                            .addComponent(loccodeText, javax.swing.GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE)
-                            .addComponent(locnameText, javax.swing.GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE))))
-                .addContainerGap())
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(unitCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(subunitCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(loccodeCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(locnameText, javax.swing.GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE)
+                            .addComponent(locrfidField))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 300, Short.MAX_VALUE)
+                        .addComponent(newButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(deleteButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(saveButton)
+                        .addGap(10, 10, 10))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,30 +184,30 @@ public class LocationForm extends javax.swing.JDialog {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(unitLabel)
+                    .addComponent(unitCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(unitLabel1)
+                    .addComponent(subunitCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nikLabel)
-                    .addComponent(loccodeText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(loccodeCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(namaLabel)
                     .addComponent(locnameText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(unitLabel)
-                    .addComponent(locunitField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(unitLabel1)
-                    .addComponent(locsubunitField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rfidLabel)
                     .addComponent(locrfidField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(saveButton)
                     .addComponent(deleteButton)
                     .addComponent(newButton))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         bindingGroup.bind();
@@ -205,7 +225,8 @@ public class LocationForm extends javax.swing.JDialog {
         int row = loclist.size() - 1;
         locationTable.setRowSelectionInterval(row, row);
         locationTable.scrollRectToVisible(locationTable.getCellRect(row, 0, true));
-        loccodeText.requestFocusInWindow();
+        unitCombo.requestFocusInWindow();
+        saveButton.setEnabled(true);
     }//GEN-LAST:event_newButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
@@ -219,6 +240,8 @@ public class LocationForm extends javax.swing.JDialog {
         loclist.removeAll(toRemove);
         
         refreshData();
+        saveButton.setEnabled(false);
+        deleteButton.setEnabled(false);
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
@@ -237,7 +260,14 @@ public class LocationForm extends javax.swing.JDialog {
         }
         
         refreshData();
+        saveButton.setEnabled(false);
+        deleteButton.setEnabled(false);
     }//GEN-LAST:event_saveButtonActionPerformed
+
+    private void locationTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_locationTableMouseClicked
+        saveButton.setEnabled(true);
+        deleteButton.setEnabled(true);
+    }//GEN-LAST:event_locationTableMouseClicked
 
     private void refreshData() {
         em.getTransaction().rollback();
@@ -329,9 +359,13 @@ public class LocationForm extends javax.swing.JDialog {
     }
     
     private void locconnect() {
+        Query query = em.createNamedQuery("Pcp.findBySetupitem");
+        query.setParameter("setupitem", "port");
+        Setup s = (Setup)query.getSingleResult();
         try {
-            connect("COM4");
-        } catch(Exception e) {
+            connect(s.getSetupvalue());
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -377,18 +411,18 @@ public class LocationForm extends javax.swing.JDialog {
     private javax.persistence.EntityManager em;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable locationTable;
-    private javax.swing.JTextField loccodeText;
+    private javax.swing.JComboBox loccodeCombo;
     private java.util.List<pcpreports.Location> loclist;
     private javax.swing.JTextField locnameText;
     private javax.persistence.Query locquery;
     private static javax.swing.JTextField locrfidField;
-    private javax.swing.JTextField locsubunitField;
-    private javax.swing.JTextField locunitField;
     private javax.swing.JLabel namaLabel;
     private javax.swing.JButton newButton;
     private javax.swing.JLabel nikLabel;
     private javax.swing.JLabel rfidLabel;
     private javax.swing.JButton saveButton;
+    private javax.swing.JComboBox subunitCombo;
+    private javax.swing.JComboBox unitCombo;
     private javax.swing.JLabel unitLabel;
     private javax.swing.JLabel unitLabel1;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;

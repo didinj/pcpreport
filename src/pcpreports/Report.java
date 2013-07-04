@@ -19,6 +19,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Report.findAll", query = "SELECT r FROM Report r"),
     @NamedQuery(name = "Report.findById", query = "SELECT r FROM Report r WHERE r.id = :id"),
+    @NamedQuery(name = "Report.findByUnit", query = "SELECT r FROM Report r WHERE r.unit = :unit"),
+    @NamedQuery(name = "Report.findBySubunit", query = "SELECT r FROM Report r WHERE r.subunit = :subunit"),
     @NamedQuery(name = "Report.findByNik", query = "SELECT r FROM Report r WHERE r.nik = :nik"),
     @NamedQuery(name = "Report.findByNama", query = "SELECT r FROM Report r WHERE r.nama = :nama"),
     @NamedQuery(name = "Report.findByRegu", query = "SELECT r FROM Report r WHERE r.regu = :regu"),
@@ -33,6 +35,10 @@ public class Report implements Serializable {
     @Column(name = "ID")
     private Integer id;
     @Basic(optional = false)
+    @Column(name = "UNIT")
+    private String unit;
+    @Column(name = "SUBUNIT")
+    private String subunit;
     @Column(name = "NIK")
     private String nik;
     @Basic(optional = false)
@@ -62,12 +68,39 @@ public class Report implements Serializable {
         this.nama = nama;
     }
 
+    public Report(String unit, String subunit, String nik, String nama, Integer regu, Date tgl, Date jam, String lokasi) {
+        this.unit = unit;
+        this.subunit = subunit;
+        this.nik = nik;
+        this.nama = nama;
+        this.regu = regu;
+        this.tgl = tgl;
+        this.jam = jam;
+        this.lokasi = lokasi;
+    }
+
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getSubunit() {
+        return subunit;
+    }
+
+    public void setSubunit(String subunit) {
+        this.subunit = subunit;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 
     public String getNik() {

@@ -50,6 +50,7 @@ public class UnitForm extends javax.swing.JDialog {
         unitCombo = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("UNIT");
         setLocationByPlatform(true);
 
         org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, unitsList, unitTable, "");
@@ -61,6 +62,11 @@ public class UnitForm extends javax.swing.JDialog {
         columnBinding.setColumnClass(String.class);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
+        unitTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                unitTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(unitTable);
 
         jLabel1.setText("Unit Code");
@@ -78,6 +84,7 @@ public class UnitForm extends javax.swing.JDialog {
         });
 
         deleteButton.setText("Delete");
+        deleteButton.setEnabled(false);
         deleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteButtonActionPerformed(evt);
@@ -85,6 +92,7 @@ public class UnitForm extends javax.swing.JDialog {
         });
 
         saveButton.setText("Save");
+        saveButton.setEnabled(false);
         saveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveButtonActionPerformed(evt);
@@ -158,6 +166,7 @@ public class UnitForm extends javax.swing.JDialog {
         unitTable.setRowSelectionInterval(row, row);
         unitTable.scrollRectToVisible(unitTable.getCellRect(row, 0, true));
         unitCombo.requestFocusInWindow();
+        saveButton.setEnabled(true);
     }//GEN-LAST:event_newButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
@@ -171,6 +180,8 @@ public class UnitForm extends javax.swing.JDialog {
         unitsList.removeAll(toRemove);
 
         refreshData();
+        saveButton.setEnabled(false);
+        deleteButton.setEnabled(false);
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
@@ -189,7 +200,14 @@ public class UnitForm extends javax.swing.JDialog {
         }
 
         refreshData();
+        saveButton.setEnabled(false);
+        deleteButton.setEnabled(false);
     }//GEN-LAST:event_saveButtonActionPerformed
+
+    private void unitTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_unitTableMouseClicked
+        saveButton.setEnabled(true);
+        deleteButton.setEnabled(true);
+    }//GEN-LAST:event_unitTableMouseClicked
 
     private void refreshData() {
         unitem.getTransaction().rollback();
