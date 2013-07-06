@@ -22,7 +22,10 @@ public class Location implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @Column(name = "ID")
+    private Integer id;
     @Column(name = "LOCCODE")
     private String loccode;
     @Column(name = "LOCNAME")
@@ -88,4 +91,9 @@ public class Location implements Serializable {
     public void setLocrfid(String locrfid) {
         this.locrfid = locrfid;
     }
+
+    public Integer getId() {
+        return id;
+    }
+    
 }

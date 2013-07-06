@@ -33,24 +33,28 @@ public class ReportForm extends javax.swing.JDialog {
     /**
      * Creates new form ReportForm
      */
-        
-    public ReportForm(java.awt.Frame parent, boolean modal) {
+    public ReportForm(java.awt.Frame parent, boolean modal, Date df, Date dt, String un, String su) {
         super(parent, modal);
+        dateFrom = df;
+        dateTo = dt;
+        unit = un;
+        subunit = su;
         initComponents();
         if (!Beans.isDesignTime()) {
             entityManager.getTransaction().begin();
         }
-        masterTable.getColumnModel().getColumn(4).setCellRenderer(new TableCellRenderDate());
-        masterTable.getColumnModel().getColumn(5).setCellRenderer(new TableCellRenderTime());
+        masterTable.getColumnModel().getColumn(6).setCellRenderer(new TableCellRenderDate());
+        masterTable.getColumnModel().getColumn(7).setCellRenderer(new TableCellRenderTime());
         masterTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         TableColumnAdjuster tca = new TableColumnAdjuster(masterTable);
         tca.adjustColumns();
         DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
         dtcr.setHorizontalAlignment(SwingConstants.CENTER);
+        masterTable.getColumnModel().getColumn(0).setCellRenderer(dtcr);
         masterTable.getColumnModel().getColumn(1).setCellRenderer(dtcr);
-        masterTable.getColumnModel().getColumn(3).setCellRenderer(dtcr);
-        masterTable.getColumnModel().getColumn(6).setCellRenderer(dtcr);
-
+        masterTable.getColumnModel().getColumn(2).setCellRenderer(dtcr);
+        masterTable.getColumnModel().getColumn(5).setCellRenderer(dtcr);
+        masterTable.getColumnModel().getColumn(8).setCellRenderer(dtcr);
     }
 
     /**
@@ -64,7 +68,7 @@ public class ReportForm extends javax.swing.JDialog {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("PcpreportPU").createEntityManager();
-        query = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT r FROM Report r");
+        query = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT r FROM Report r WHERE r.unit=:unit AND r.subunit=:subunit AND r.tgl>=:datefrom AND r.tgl<=:dateto").setParameter("unit", unit).setParameter("subunit",subunit).setParameter("datefrom",dateFrom).setParameter("dateto",dateTo);
         list = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(query.getResultList());
         todayQuery = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT r FROM Report r WHERE r.tgl=:tgl");
         todayQuery.setParameter("tgl", new java.util.Date(), TemporalType.DATE);
@@ -74,12 +78,12 @@ public class ReportForm extends javax.swing.JDialog {
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         kolomCombo = new javax.swing.JComboBox();
         cariText = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        testparams = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("PCP Report");
@@ -122,6 +126,7 @@ public class ReportForm extends javax.swing.JDialog {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pcpreports/icons/Excel-icon24.png"))); // NOI18N
         jButton1.setText("Export ke Excel");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -148,18 +153,12 @@ public class ReportForm extends javax.swing.JDialog {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jButton2.setText("Data Hari Ini");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setText("Pencarian");
 
         kolomCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NIK", "NAMA", "REGU", "TANGGAL", "LOKASI" }));
 
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pcpreports/icons/search-icon24.png"))); // NOI18N
         jButton3.setText("Cari");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -167,6 +166,7 @@ public class ReportForm extends javax.swing.JDialog {
             }
         });
 
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pcpreports/icons/refresh-icon24.png"))); // NOI18N
         jButton4.setText("Reset");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -174,15 +174,17 @@ public class ReportForm extends javax.swing.JDialog {
             }
         });
 
+        testparams.setText("testparam");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton4)
+                .addGap(26, 26, 26)
+                .addComponent(testparams)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -198,12 +200,12 @@ public class ReportForm extends javax.swing.JDialog {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
                     .addComponent(jLabel1)
                     .addComponent(kolomCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cariText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(jButton4)
+                    .addComponent(testparams))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -228,7 +230,7 @@ public class ReportForm extends javax.swing.JDialog {
                 .addComponent(masterScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -245,26 +247,18 @@ public class ReportForm extends javax.swing.JDialog {
         bindingGroup.bind();
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-785)/2, (screenSize.height-483)/2, 785, 483);
+        setBounds((screenSize.width-785)/2, (screenSize.height-520)/2, 785, 520);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         DateFormat filedate = new SimpleDateFormat("ddMMyyyy");
-        fillData(masterTable, new File("C:\\Pcpreport" + filedate.format(new Date()) + ".xls"));
+        fillData(masterTable, new File("C:\\Pcpreports\\Data\\Pcpreport" + filedate.format(new Date()) + ".xls"));
         JOptionPane.showMessageDialog(null, "Data di simpan di "
-                + "'C: \\ Pcpreport.xls'", "Message",
+                + "'C:\\Pcpreports\\Data\\Pcpreport.xls'", "Message",
                 JOptionPane.INFORMATION_MESSAGE);
         setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        list.clear();
-        list.addAll(todayQuery.getResultList());
-        masterTable.updateUI();
-        setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -281,28 +275,48 @@ public class ReportForm extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Kotak pencarian belum di isi!");
         } else {
             if (kolomCombo.getSelectedItem().equals("NIK")) {
-                cariQuery = entityManager.createQuery("SELECT r FROM Report r WHERE r.nik=:nik");
+                cariQuery = entityManager.createQuery("SELECT r FROM Report r WHERE r.nik=:nik AND r.unit=:unit AND r.subunit=:subunit AND r.tgl>=:datefrom AND r.tgl<=:dateto");
                 cariQuery.setParameter("nik", cariText.getText());
+                cariQuery.setParameter("unit", unit);
+                cariQuery.setParameter("subunit", subunit);
+                cariQuery.setParameter("datefrom", dateFrom);
+                cariQuery.setParameter("dateto", dateTo);
             }
             if (kolomCombo.getSelectedItem().equals("NAMA")) {
-                cariQuery = entityManager.createQuery("SELECT r FROM Report r WHERE r.nama=:nama");
+                cariQuery = entityManager.createQuery("SELECT r FROM Report r WHERE r.nama=:nama AND r.unit=:unit AND r.subunit=:subunit AND r.tgl>=:datefrom AND r.tgl<=:dateto");
                 cariQuery.setParameter("nama", cariText.getText());
+                cariQuery.setParameter("unit", unit);
+                cariQuery.setParameter("subunit", subunit);
+                cariQuery.setParameter("datefrom", dateFrom);
+                cariQuery.setParameter("dateto", dateTo);
             }
             if (kolomCombo.getSelectedItem().equals("REGU")) {
-                cariQuery = entityManager.createQuery("SELECT r FROM Report r WHERE r.regu=:regu");
+                cariQuery = entityManager.createQuery("SELECT r FROM Report r WHERE r.regu=:regu AND r.unit=:unit AND r.subunit=:subunit AND r.tgl>=:datefrom AND r.tgl<=:dateto");
                 cariQuery.setParameter("regu", cariText.getText());
+                cariQuery.setParameter("unit", unit);
+                cariQuery.setParameter("subunit", subunit);
+                cariQuery.setParameter("datefrom", dateFrom);
+                cariQuery.setParameter("dateto", dateTo);
             }
             if (kolomCombo.getSelectedItem().equals("TANGGAL")) {
                 try {
-                    cariQuery = entityManager.createQuery("SELECT r FROM Report r WHERE r.tgl=:tgl");
+                    cariQuery = entityManager.createQuery("SELECT r FROM Report r WHERE r.tgl=:tgl AND r.unit=:unit AND r.subunit=:subunit AND r.tgl>=:datefrom AND r.tgl<=:dateto");
                     cariQuery.setParameter("tgl", df.parse(cariText.getText()));
+                    cariQuery.setParameter("unit", unit);
+                    cariQuery.setParameter("subunit", subunit);
+                    cariQuery.setParameter("datefrom", dateFrom);
+                    cariQuery.setParameter("dateto", dateTo);
                 } catch (ParseException ex) {
                     Logger.getLogger(ReportForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             if (kolomCombo.getSelectedItem().equals("LOKASI")) {
-                cariQuery = entityManager.createQuery("SELECT r FROM Report r WHERE r.lokasi=:lokasi");
+                cariQuery = entityManager.createQuery("SELECT r FROM Report r WHERE r.lokasi=:lokasi AND r.unit=:unit AND r.subunit=:subunit AND r.tgl>=:datefrom AND r.tgl<=:dateto");
                 cariQuery.setParameter("lokasi", cariText.getText());
+                cariQuery.setParameter("unit", unit);
+                cariQuery.setParameter("subunit", subunit);
+                cariQuery.setParameter("datefrom", dateFrom);
+                cariQuery.setParameter("dateto", dateTo);
             }
             list.clear();
             list.addAll(cariQuery.getResultList());
@@ -327,11 +341,11 @@ public class ReportForm extends javax.swing.JDialog {
             int j = 0;
             for (int i = 0; i < model.getRowCount(); i++) {
                 for (j = 0; j < model.getColumnCount(); j++) {
-                    if (j == 4) {
+                    if (j == 6) {
                         Label row = new Label(j, i + 1,
                                 datefmt.format(model.getValueAt(i, j)).toString());
                         sheet1.addCell(row);
-                    } else if (j == 5) {
+                    } else if (j == 7) {
                         Label row = new Label(j, i + 1,
                                 timefmt.format(model.getValueAt(i, j)).toString());
                         sheet1.addCell(row);
@@ -385,7 +399,7 @@ public class ReportForm extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                ReportForm dialog = new ReportForm(new javax.swing.JFrame(), true);
+                ReportForm dialog = new ReportForm(new javax.swing.JFrame(), true, null, null, null, null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
 
                     @Override
@@ -397,12 +411,15 @@ public class ReportForm extends javax.swing.JDialog {
             }
         });
     }
+    private Date dateFrom;
+    private Date dateTo;
+    private String unit;
+    private String subunit;
     private javax.persistence.Query cariQuery;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField cariText;
     private javax.persistence.EntityManager entityManager;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
@@ -414,6 +431,7 @@ public class ReportForm extends javax.swing.JDialog {
     private javax.swing.JScrollPane masterScrollPane;
     private javax.swing.JTable masterTable;
     private javax.persistence.Query query;
+    private javax.swing.JLabel testparams;
     private javax.persistence.Query todayQuery;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables

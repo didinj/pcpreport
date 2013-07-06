@@ -21,14 +21,14 @@ import javax.swing.JOptionPane;
  * @author FADHILAH
  */
 public class Reportprocess {
-    EntityManagerFactory emf =
-            Persistence.createEntityManagerFactory("jdbc:derby:Pcpreport;create=true");
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("PcpreportPU");
     
     public void processData(Date from, Date to, String unit, String subunit) {
         DateFormat fmtdate = new SimpleDateFormat("dd/MM/yyyy");
         DateFormat fmttime = new SimpleDateFormat("HH:mm:ss");
         EntityManager em = emf.createEntityManager();
-        Query empQuery = em.createNamedQuery("Employee.findAll");
+        Query empQuery = em.createNamedQuery("Employee.findByUnit");
+        empQuery.setParameter("unit", unit);
         List<Employee> emps = empQuery.getResultList();
         GregorianCalendar gc = new GregorianCalendar();
         for (Employee emp : emps) {

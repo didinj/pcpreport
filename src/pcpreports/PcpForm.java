@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
 public class PcpForm extends javax.swing.JFrame {
 
     EntityManagerFactory emf =
-            Persistence.createEntityManagerFactory("jdbc:derby:Pcpreport;create=true");
+            Persistence.createEntityManagerFactory("PcpreportPU");
 
     /**
      * Creates new form PcpForm
@@ -343,7 +343,7 @@ public class PcpForm extends javax.swing.JFrame {
         setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_reportButtonActionPerformed
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        ReportForm report = new ReportForm(this, true);
+        ReportForm report = new ReportForm(this, true, null, null, null, null);
         report.setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
@@ -357,7 +357,7 @@ public class PcpForm extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        ReportForm report = new ReportForm(this, true);
+        ReportForm report = new ReportForm(this, true, null, null, null, null);
         report.setVisible(true);
         setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_jButton2ActionPerformed
