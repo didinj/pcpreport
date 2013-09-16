@@ -238,13 +238,25 @@ public class LocationForm extends javax.swing.JDialog {
             em.remove(l);
         }
         loclist.removeAll(toRemove);
-        
+        saveData();
         refreshData();
         saveButton.setEnabled(false);
         deleteButton.setEnabled(false);
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        saveData();
+        refreshData();
+        saveButton.setEnabled(false);
+        deleteButton.setEnabled(false);
+    }//GEN-LAST:event_saveButtonActionPerformed
+
+    private void locationTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_locationTableMouseClicked
+        saveButton.setEnabled(true);
+        deleteButton.setEnabled(true);
+    }//GEN-LAST:event_locationTableMouseClicked
+
+    private void saveData() {
         try {
             em.getTransaction().commit();
             em.getTransaction().begin();
@@ -258,17 +270,8 @@ public class LocationForm extends javax.swing.JDialog {
             loclist.clear();
             loclist.addAll(merged);
         }
-        
-        refreshData();
-        saveButton.setEnabled(false);
-        deleteButton.setEnabled(false);
-    }//GEN-LAST:event_saveButtonActionPerformed
-
-    private void locationTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_locationTableMouseClicked
-        saveButton.setEnabled(true);
-        deleteButton.setEnabled(true);
-    }//GEN-LAST:event_locationTableMouseClicked
-
+    }
+    
     private void refreshData() {
         em.getTransaction().rollback();
         em.getTransaction().begin();

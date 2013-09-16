@@ -178,13 +178,25 @@ public class UnitForm extends javax.swing.JDialog {
             unitem.remove(u);
         }
         unitsList.removeAll(toRemove);
-
+        saveData();
         refreshData();
         saveButton.setEnabled(false);
         deleteButton.setEnabled(false);
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        saveData();
+        refreshData();
+        saveButton.setEnabled(false);
+        deleteButton.setEnabled(false);
+    }//GEN-LAST:event_saveButtonActionPerformed
+
+    private void unitTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_unitTableMouseClicked
+        saveButton.setEnabled(true);
+        deleteButton.setEnabled(true);
+    }//GEN-LAST:event_unitTableMouseClicked
+
+    private void saveData() {
         try {
             unitem.getTransaction().commit();
             unitem.getTransaction().begin();
@@ -198,17 +210,8 @@ public class UnitForm extends javax.swing.JDialog {
             unitsList.clear();
             unitsList.addAll(merged);
         }
-
-        refreshData();
-        saveButton.setEnabled(false);
-        deleteButton.setEnabled(false);
-    }//GEN-LAST:event_saveButtonActionPerformed
-
-    private void unitTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_unitTableMouseClicked
-        saveButton.setEnabled(true);
-        deleteButton.setEnabled(true);
-    }//GEN-LAST:event_unitTableMouseClicked
-
+    }
+    
     private void refreshData() {
         unitem.getTransaction().rollback();
         unitem.getTransaction().begin();

@@ -4,6 +4,7 @@
  */
 package pcpreports;
 
+import java.awt.Component;
 import java.beans.Beans;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,7 @@ public class SubunitForm extends javax.swing.JDialog {
         initComponents();
         if (!Beans.isDesignTime()) {
             subem.getTransaction().begin();
+            disabledForm();
         }
     }
 
@@ -41,15 +43,16 @@ public class SubunitForm extends javax.swing.JDialog {
         subunitList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(subunitQuery.getResultList());
         jScrollPane1 = new javax.swing.JScrollPane();
         subTable = new javax.swing.JTable();
+        unitPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        unitCombo = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
-        subnameField = new javax.swing.JTextField();
+        jComboBox1 = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
+        subnameField = new javax.swing.JTextField();
         newButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
         saveButton = new javax.swing.JButton();
-        unitCombo = new javax.swing.JComboBox();
-        jComboBox1 = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("SUB UNIT");
@@ -74,14 +77,61 @@ public class SubunitForm extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(subTable);
 
+        unitPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
         jLabel1.setText("Unit");
+
+        unitCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "001", "002", "003", "004", "005", "006", "007", "008", "009", "010", "011", "012", "013", "014", "015", "016", "017", "018", "019", "020", "021", "022", "023", "024", "025", "026", "027", "028", "029", "030", "031", "032", "033", "034", "035" }));
+
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, subTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.unitcode}"), unitCombo, org.jdesktop.beansbinding.BeanProperty.create("selectedItem"));
+        bindingGroup.addBinding(binding);
 
         jLabel2.setText("Sub Unit Code");
 
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, subTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.subunitname}"), subnameField, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" }));
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, subTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.subunitcode}"), jComboBox1, org.jdesktop.beansbinding.BeanProperty.create("selectedItem"));
         bindingGroup.addBinding(binding);
 
         jLabel3.setText("Sub Unit Name");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, subTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.subunitname}"), subnameField, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
+        javax.swing.GroupLayout unitPanelLayout = new javax.swing.GroupLayout(unitPanel);
+        unitPanel.setLayout(unitPanelLayout);
+        unitPanelLayout.setHorizontalGroup(
+            unitPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(unitPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(unitPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(unitPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(subnameField)
+                    .addComponent(unitCombo, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        unitPanelLayout.setVerticalGroup(
+            unitPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(unitPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(unitPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(unitCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(unitPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(unitPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(subnameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
 
         newButton.setText("New");
         newButton.addActionListener(new java.awt.event.ActionListener() {
@@ -106,43 +156,26 @@ public class SubunitForm extends javax.swing.JDialog {
             }
         });
 
-        unitCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "001", "002", "003", "004", "005", "006", "007", "008", "009", "010", "011", "012", "013", "014", "015", "016", "017", "018", "019", "020", "021", "022", "023", "024", "025", "026", "027", "028", "029", "030", "031", "032", "033", "034", "035" }));
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, subTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.unitcode}"), unitCombo, org.jdesktop.beansbinding.BeanProperty.create("selectedItem"));
-        bindingGroup.addBinding(binding);
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" }));
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, subTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.subunitcode}"), jComboBox1, org.jdesktop.beansbinding.BeanProperty.create("selectedItem"));
-        bindingGroup.addBinding(binding);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(unitCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(subnameField))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(newButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(deleteButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(saveButton)
-                .addGap(10, 10, 10))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(unitPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(newButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(deleteButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(saveButton)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -150,30 +183,20 @@ public class SubunitForm extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(unitCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(unitPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(subnameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(saveButton)
                     .addComponent(deleteButton)
                     .addComponent(newButton))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         bindingGroup.bind();
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-396)/2, (screenSize.height-433)/2, 396, 433);
+        setBounds((screenSize.width-404)/2, (screenSize.height-447)/2, 404, 447);
     }// </editor-fold>//GEN-END:initComponents
 
     private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
@@ -185,6 +208,7 @@ public class SubunitForm extends javax.swing.JDialog {
         subTable.scrollRectToVisible(subTable.getCellRect(row, 0, true));
         unitCombo.requestFocusInWindow();
         saveButton.setEnabled(true);
+        enabledForm();
     }//GEN-LAST:event_newButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
@@ -196,13 +220,26 @@ public class SubunitForm extends javax.swing.JDialog {
             subem.remove(s);
         }
         subunitList.removeAll(toRemove);
-
+        saveData();
         refreshData();
         saveButton.setEnabled(false);
         deleteButton.setEnabled(false);
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        saveData();
+        refreshData();
+        saveButton.setEnabled(false);
+        deleteButton.setEnabled(false);
+    }//GEN-LAST:event_saveButtonActionPerformed
+
+    private void subTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_subTableMouseClicked
+        saveButton.setEnabled(true);
+        deleteButton.setEnabled(true);
+        enabledForm();
+    }//GEN-LAST:event_subTableMouseClicked
+
+    private void saveData() {
         try {
             subem.getTransaction().commit();
             subem.getTransaction().begin();
@@ -216,17 +253,8 @@ public class SubunitForm extends javax.swing.JDialog {
             subunitList.clear();
             subunitList.addAll(merged);
         }
-
-        refreshData();
-        saveButton.setEnabled(false);
-        deleteButton.setEnabled(false);
-    }//GEN-LAST:event_saveButtonActionPerformed
-
-    private void subTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_subTableMouseClicked
-        saveButton.setEnabled(true);
-        deleteButton.setEnabled(true);
-    }//GEN-LAST:event_subTableMouseClicked
-
+    }
+    
     private void refreshData() {
         subem.getTransaction().rollback();
         subem.getTransaction().begin();
@@ -236,6 +264,21 @@ public class SubunitForm extends javax.swing.JDialog {
         }
         subunitList.clear();
         subunitList.addAll(data);
+        disabledForm();
+    }
+    
+    private void disabledForm() {
+        Component[] comps = unitPanel.getComponents();
+        for(Component comp:comps) {
+            comp.setEnabled(false);
+        }
+    }
+    
+    private void enabledForm() {
+        Component[] comps = unitPanel.getComponents();
+        for(Component comp:comps) {
+            comp.setEnabled(true);
+        }
     }
 
     /**
@@ -302,6 +345,7 @@ public class SubunitForm extends javax.swing.JDialog {
     private java.util.List<pcpreports.Subunit> subunitList;
     private javax.persistence.Query subunitQuery;
     private javax.swing.JComboBox unitCombo;
+    private javax.swing.JPanel unitPanel;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

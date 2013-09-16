@@ -152,7 +152,7 @@ public class EmployeeForm extends javax.swing.JDialog implements SerialPortEvent
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.unit}"), unitCombo, org.jdesktop.beansbinding.BeanProperty.create("selectedItem"));
         bindingGroup.addBinding(binding);
 
-        jabatanCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ANGGOTA", "WADANRU", "DANRU", "WADANUNIT", "DANUNIT", "WADANSEKTOR", "DANSEKTOR" }));
+        jabatanCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ANGGOTA", "SEKWAN", "WADANRU", "DANRU", "WADANUNIT", "DANUNIT", "WADANSEKTOR", "DANSEKTOR", "KOORDINATOR" }));
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.jabatan}"), jabatanCombo, org.jdesktop.beansbinding.BeanProperty.create("selectedItem"));
         bindingGroup.addBinding(binding);
@@ -259,20 +259,7 @@ public class EmployeeForm extends javax.swing.JDialog implements SerialPortEvent
     }// </editor-fold>//GEN-END:initComponents
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        try {
-            entityManager.getTransaction().commit();
-            entityManager.getTransaction().begin();
-        } catch (RollbackException rex) {
-            rex.printStackTrace();
-            entityManager.getTransaction().begin();
-            List<pcpreports.Employee> merged = new ArrayList<pcpreports.Employee>(list.size());
-            for (pcpreports.Employee e : list) {
-                merged.add(entityManager.merge(e));
-            }
-            list.clear();
-            list.addAll(merged);
-        }
-
+        saveData();
         refreshData();
         saveButton.setEnabled(false);
         deleteButton.setEnabled(false);
@@ -299,6 +286,7 @@ public class EmployeeForm extends javax.swing.JDialog implements SerialPortEvent
         }
         list.removeAll(toRemove);
 
+        saveData();
         refreshData();
         saveButton.setEnabled(false);
         deleteButton.setEnabled(false);
@@ -309,6 +297,22 @@ public class EmployeeForm extends javax.swing.JDialog implements SerialPortEvent
         deleteButton.setEnabled(true);
     }//GEN-LAST:event_masterTableMouseClicked
 
+    private void saveData() {
+        try {
+            entityManager.getTransaction().commit();
+            entityManager.getTransaction().begin();
+        } catch (RollbackException rex) {
+            rex.printStackTrace();
+            entityManager.getTransaction().begin();
+            List<pcpreports.Employee> merged = new ArrayList<pcpreports.Employee>(list.size());
+            for (pcpreports.Employee e : list) {
+                merged.add(entityManager.merge(e));
+            }
+            list.clear();
+            list.addAll(merged);
+        }
+    }
+    
     private void refreshData() {
         entityManager.getTransaction().rollback();
         entityManager.getTransaction().begin();
