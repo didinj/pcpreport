@@ -53,9 +53,9 @@
               <Component id="jToolBar1" min="-2" pref="67" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="2" attributes="0">
-                  <Component id="jPanel1" alignment="2" pref="298" max="32767" attributes="0"/>
-                  <Component id="jPanel2" alignment="2" pref="298" max="32767" attributes="0"/>
-                  <Component id="jPanel3" alignment="2" pref="298" max="32767" attributes="0"/>
+                  <Component id="jPanel1" alignment="2" pref="294" max="32767" attributes="0"/>
+                  <Component id="jPanel2" alignment="2" pref="294" max="32767" attributes="0"/>
+                  <Component id="jPanel3" alignment="2" pref="294" max="32767" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jSeparator1" min="-2" pref="5" max="-2" attributes="0"/>
@@ -439,7 +439,7 @@
                       <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                       <Component id="dateTo" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="17" max="32767" attributes="0"/>
+                  <EmptySpace pref="13" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="punitCombo" alignment="3" min="-2" max="-2" attributes="0"/>

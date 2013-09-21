@@ -8,6 +8,7 @@ import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.ProgressMonitor;
 import javax.swing.Timer;
 
@@ -448,6 +449,7 @@ public class MainForm extends javax.swing.JFrame implements ActionListener {
         pcpimport.getdatafromsd(unit, subunit, driveletter);
         pcpimport.putdatatosd(unit, subunit, driveletter);
         setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+        JOptionPane.showMessageDialog(null, "Data berhasil di tarik");
     }//GEN-LAST:event_tarikButtonActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -494,6 +496,7 @@ public class MainForm extends javax.swing.JFrame implements ActionListener {
         reportprocess = new Reportprocess();
         reportprocess.processData(from, to, unit, subunit);
         setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+        JOptionPane.showMessageDialog(null, "Report telah di proses");
     }//GEN-LAST:event_reportButtonActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
