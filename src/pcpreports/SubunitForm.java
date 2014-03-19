@@ -58,6 +58,8 @@ public class SubunitForm extends javax.swing.JDialog {
         setTitle("SUB UNIT");
         setLocationByPlatform(true);
 
+        subTable.setAutoCreateRowSorter(true);
+
         org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, subunitList, subTable, "");
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${unitcode}"));
         columnBinding.setColumnName("Unitcode");

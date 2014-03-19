@@ -7,7 +7,10 @@ package pcpreports;
 import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.ProgressMonitor;
 import javax.swing.Timer;
@@ -39,6 +42,7 @@ public class MainForm extends javax.swing.JFrame implements ActionListener {
     private void initComponents() {
 
         entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("PcpreportPU").createEntityManager();
+        tipeRadio = new javax.swing.ButtonGroup();
         jToolBar1 = new javax.swing.JToolBar();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -56,28 +60,20 @@ public class MainForm extends javax.swing.JFrame implements ActionListener {
         unitCombo = new javax.swing.JComboBox();
         jLabel6 = new javax.swing.JLabel();
         subunitCombo = new javax.swing.JComboBox();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        dateFrom = new com.toedter.calendar.JDateChooser();
-        dateTo = new com.toedter.calendar.JDateChooser();
-        jLabel8 = new javax.swing.JLabel();
-        reportButton = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
-        punitCombo = new javax.swing.JComboBox();
-        jLabel10 = new javax.swing.JLabel();
-        psubCombo = new javax.swing.JComboBox();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jButton8 = new javax.swing.JButton();
+        repButton = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         prdateFrom = new com.toedter.calendar.JDateChooser();
         prdateTo = new com.toedter.calendar.JDateChooser();
-        jLabel13 = new javax.swing.JLabel();
-        prunitCombo = new javax.swing.JComboBox();
-        jLabel14 = new javax.swing.JLabel();
-        prsubCombo = new javax.swing.JComboBox();
+        absensiRadio = new javax.swing.JRadioButton();
+        pcpRadio = new javax.swing.JRadioButton();
+        jLabel15 = new javax.swing.JLabel();
+        tahunChs = new com.toedter.calendar.JYearChooser();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        bulanChs = new javax.swing.JComboBox();
         jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -246,100 +242,20 @@ public class MainForm extends javax.swing.JFrame implements ActionListener {
                 .addGap(26, 26, 26))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel2.setToolTipText("STEP 2");
-        jPanel2.setPreferredSize(new java.awt.Dimension(280, 250));
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("LANGKAH 2 : PROSES REPORT PCP");
-
-        jLabel7.setText("Tanggal Mulai");
-
-        jLabel8.setText("Tanggal Akhir");
-
-        reportButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pcpreports/icons/process.png"))); // NOI18N
-        reportButton.setText("Proses Report");
-        reportButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                reportButtonActionPerformed(evt);
-            }
-        });
-
-        jLabel9.setText("PILIH UNIT");
-
-        punitCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "001", "002", "003", "004", "005", "006", "007", "008", "009", "010", "011", "012", "013", "014", "015", "016", "017", "018", "019", "020", "021", "022", "023", "024", "025", "026", "027", "028", "029", "030", "031", "032", "033", "034", "035" }));
-
-        jLabel10.setText("PILIH SUBUNIT");
-
-        psubCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" }));
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel7))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(punitCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(psubCombo, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(dateTo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))
-                            .addComponent(dateFrom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(73, 73, 73))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(63, 63, 63)
-                .addComponent(reportButton)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addGap(33, 33, 33)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
-                    .addComponent(dateFrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8)
-                    .addComponent(dateTo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(punitCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(psubCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
-                .addComponent(reportButton)
-                .addGap(25, 25, 25))
-        );
-
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel3.setToolTipText("STEP 3");
         jPanel3.setPreferredSize(new java.awt.Dimension(280, 250));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("LANGKAH 3 : CETAK REPORT PCP");
+        jLabel3.setText("LANGKAH 2 : CETAK REPORT PCP");
 
-        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pcpreports/icons/print.png"))); // NOI18N
-        jButton8.setText("Lihat Report");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        repButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pcpreports/icons/print.png"))); // NOI18N
+        repButton.setText("Lihat Report");
+        repButton.setEnabled(false);
+        repButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                repButtonActionPerformed(evt);
             }
         });
 
@@ -347,63 +263,101 @@ public class MainForm extends javax.swing.JFrame implements ActionListener {
 
         jLabel12.setText("Tanggal Akhir");
 
-        jLabel13.setText("PILIH UNIT");
+        prdateFrom.setEnabled(false);
 
-        prunitCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "001", "002", "003", "004", "005", "006", "007", "008", "009", "010", "011", "012", "013", "014", "015", "016", "017", "018", "019", "020", "021", "022", "023", "024", "025", "026", "027", "028", "029", "030", "031", "032", "033", "034", "035" }));
+        prdateTo.setEnabled(false);
 
-        jLabel14.setText("PILIH SUBUNIT");
+        tipeRadio.add(absensiRadio);
+        absensiRadio.setText("ABSENSI");
+        absensiRadio.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                absensiRadioMouseClicked(evt);
+            }
+        });
 
-        prsubCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" }));
+        tipeRadio.add(pcpRadio);
+        pcpRadio.setText("PCP");
+        pcpRadio.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pcpRadioMouseClicked(evt);
+            }
+        });
+
+        jLabel15.setText("Jenis Report");
+
+        tahunChs.setEnabled(false);
+
+        jLabel2.setText("Bulan");
+
+        jLabel7.setText("Tahun");
+
+        bulanChs.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember" }));
+        bulanChs.setEnabled(false);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
+            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton8)
+                .addComponent(repButton)
                 .addGap(56, 56, 56))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(38, 38, 38)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(37, 37, 37)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel11)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel13)
-                            .addComponent(jLabel12)))
-                    .addComponent(jLabel14))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(prdateTo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(prdateFrom, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
-                    .addComponent(prunitCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(prsubCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addComponent(absensiRadio)
+                            .addGap(92, 92, 92))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                            .addComponent(pcpRadio)
+                            .addGap(37, 37, 37)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(prdateTo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(prdateFrom, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(tahunChs, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
+                            .addComponent(bulanChs, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3)
-                .addGap(34, 34, 34)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(prdateFrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11))
+                    .addComponent(jLabel15)
+                    .addComponent(absensiRadio)
+                    .addComponent(pcpRadio))
+                .addGap(5, 5, 5)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(bulanChs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel7)
+                    .addComponent(tahunChs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel11)
+                    .addComponent(prdateFrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel12)
                     .addComponent(prdateTo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(prunitCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel13))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(prsubCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton8)
+                .addComponent(repButton)
                 .addGap(26, 26, 26))
         );
 
@@ -416,8 +370,6 @@ public class MainForm extends javax.swing.JFrame implements ActionListener {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -428,16 +380,15 @@ public class MainForm extends javax.swing.JFrame implements ActionListener {
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30))
         );
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-880)/2, (screenSize.height-458)/2, 880, 458);
+        setBounds((screenSize.width-602)/2, (screenSize.height-458)/2, 602, 458);
     }// </editor-fold>//GEN-END:initComponents
 
     private void tarikButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tarikButtonActionPerformed
@@ -478,8 +429,19 @@ public class MainForm extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        ReportForm rf = new ReportForm(this, true, prdateFrom.getDate(), prdateTo.getDate(), prunitCombo.getSelectedItem().toString().trim(), prsubCombo.getSelectedItem().toString().trim());
-        rf.setVisible(true);
+        if (absensiRadio.isSelected()) {
+            reportprocess = new Reportprocess();
+            reportprocess.processData(prdateFrom.getDate(), prdateTo.getDate(), unitCombo.getSelectedItem().toString().trim(), subunitCombo.getSelectedItem().toString().trim());
+            ReportForm rf = new ReportForm(this, true, prdateFrom.getDate(), prdateTo.getDate(), unitCombo.getSelectedItem().toString().trim(), subunitCombo.getSelectedItem().toString().trim());
+            rf.setVisible(true);
+        } else if (pcpRadio.isSelected()) {
+            reportprocess = new Reportprocess();
+            reportprocess.processData(prdateFrom.getDate(), prdateTo.getDate(), unitCombo.getSelectedItem().toString().trim(), subunitCombo.getSelectedItem().toString().trim());
+            ReportForm rf = new ReportForm(this, true, prdateFrom.getDate(), prdateTo.getDate(), unitCombo.getSelectedItem().toString().trim(), subunitCombo.getSelectedItem().toString().trim());
+            rf.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Pilih dulu jenis report!");
+        }
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -487,24 +449,44 @@ public class MainForm extends javax.swing.JFrame implements ActionListener {
         sf.setVisible(true);
     }//GEN-LAST:event_jButton7ActionPerformed
 
-    private void reportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportButtonActionPerformed
+    private void repButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_repButtonActionPerformed
         setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        Date from = dateFrom.getDate();
-        Date to = dateTo.getDate();
-        String unit = punitCombo.getSelectedItem().toString().trim();
-        String subunit = psubCombo.getSelectedItem().toString().trim();
-        reportprocess = new Reportprocess();
-        reportprocess.processData(from, to, unit, subunit);
+        if (absensiRadio.isSelected()) {
+            reportprocess = new Reportprocess();
+            try {
+                reportprocess.processAbsensi(new SimpleDateFormat("ddMMMyyyy").parse("01"+bulanChs.getSelectedItem().toString()+Integer.toString(tahunChs.getYear())), new SimpleDateFormat("ddMMMyyyy").parse("31"+bulanChs.getSelectedItem().toString()+Integer.toString(tahunChs.getYear())), unitCombo.getSelectedItem().toString().trim(), subunitCombo.getSelectedItem().toString().trim());
+            } catch (ParseException ex) {
+                Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            AbsensiForm absensi = new AbsensiForm(this, true, bulanChs.getSelectedItem().toString(), Integer.toString(tahunChs.getYear()), unitCombo.getSelectedItem().toString().trim(), subunitCombo.getSelectedItem().toString().trim());
+            absensi.setVisible(true);
+        } else if (pcpRadio.isSelected()) {
+            reportprocess = new Reportprocess();
+            reportprocess.processData(prdateFrom.getDate(), prdateTo.getDate(), unitCombo.getSelectedItem().toString().trim(), subunitCombo.getSelectedItem().toString().trim());
+            ReportForm report = new ReportForm(this, true, prdateFrom.getDate(), prdateTo.getDate(), unitCombo.getSelectedItem().toString().trim(), subunitCombo.getSelectedItem().toString().trim());
+            report.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Pilih dulu jenis report!");
+        }
         setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-        JOptionPane.showMessageDialog(null, "Report telah di proses");
-    }//GEN-LAST:event_reportButtonActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        ReportForm report = new ReportForm(this, true, prdateFrom.getDate(), prdateTo.getDate(), prunitCombo.getSelectedItem().toString().trim(), prsubCombo.getSelectedItem().toString().trim());
-        report.setVisible(true);
-        setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-    }//GEN-LAST:event_jButton8ActionPerformed
+    }//GEN-LAST:event_repButtonActionPerformed
+
+    private void absensiRadioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_absensiRadioMouseClicked
+        bulanChs.setEnabled(true);
+        tahunChs.setEnabled(true);
+        repButton.setEnabled(true);
+        prdateFrom.setEnabled(false);
+        prdateTo.setEnabled(false);
+    }//GEN-LAST:event_absensiRadioMouseClicked
+
+    private void pcpRadioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pcpRadioMouseClicked
+        bulanChs.setEnabled(false);
+        tahunChs.setEnabled(false);
+        repButton.setEnabled(true);
+        prdateFrom.setEnabled(true);
+        prdateTo.setEnabled(true);
+    }//GEN-LAST:event_pcpRadioMouseClicked
 
     /**
      * @param args the command line arguments
@@ -550,8 +532,8 @@ public class MainForm extends javax.swing.JFrame implements ActionListener {
     private Pcpimport pcpimport;
     private Reportprocess reportprocess;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.toedter.calendar.JDateChooser dateFrom;
-    private com.toedter.calendar.JDateChooser dateTo;
+    private javax.swing.JRadioButton absensiRadio;
+    private javax.swing.JComboBox bulanChs;
     private javax.swing.JComboBox driveCombo;
     private javax.persistence.EntityManager entityManager;
     private javax.swing.JButton jButton1;
@@ -561,35 +543,28 @@ public class MainForm extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JRadioButton pcpRadio;
     public com.toedter.calendar.JDateChooser prdateFrom;
     public com.toedter.calendar.JDateChooser prdateTo;
-    public javax.swing.JComboBox prsubCombo;
-    public javax.swing.JComboBox prunitCombo;
-    private javax.swing.JComboBox psubCombo;
-    private javax.swing.JComboBox punitCombo;
-    private javax.swing.JButton reportButton;
+    private javax.swing.JButton repButton;
     private javax.swing.JComboBox subunitCombo;
+    private com.toedter.calendar.JYearChooser tahunChs;
     private javax.swing.JButton tarikButton;
+    private javax.swing.ButtonGroup tipeRadio;
     private javax.swing.JComboBox unitCombo;
     // End of variables declaration//GEN-END:variables
 

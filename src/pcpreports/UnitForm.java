@@ -53,6 +53,8 @@ public class UnitForm extends javax.swing.JDialog {
         setTitle("UNIT");
         setLocationByPlatform(true);
 
+        unitTable.setAutoCreateRowSorter(true);
+
         org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, unitsList, unitTable, "");
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${unitname}"));
         columnBinding.setColumnName("Unitname");
@@ -149,7 +151,7 @@ public class UnitForm extends javax.swing.JDialog {
                     .addComponent(saveButton)
                     .addComponent(deleteButton)
                     .addComponent(newButton))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         bindingGroup.bind();

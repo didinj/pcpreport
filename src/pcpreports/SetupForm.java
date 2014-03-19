@@ -177,13 +177,25 @@ public class SetupForm extends javax.swing.JDialog {
             setupem.remove(s);
         }
         setuplist.removeAll(toRemove);
-
+        saveData();
         refreshData();
         saveButton.setEnabled(false);
         deleteButton.setEnabled(false);
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        saveData();
+        refreshData();
+        saveButton.setEnabled(false);
+        deleteButton.setEnabled(false);
+    }//GEN-LAST:event_saveButtonActionPerformed
+
+    private void setupTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_setupTableMouseClicked
+        saveButton.setEnabled(true);
+        deleteButton.setEnabled(true);
+    }//GEN-LAST:event_setupTableMouseClicked
+
+    private void saveData() {
         try {
             setupem.getTransaction().commit();
             setupem.getTransaction().begin();
@@ -197,16 +209,7 @@ public class SetupForm extends javax.swing.JDialog {
             setuplist.clear();
             setuplist.addAll(merged);
         }
-
-        refreshData();
-        saveButton.setEnabled(false);
-        deleteButton.setEnabled(false);
-    }//GEN-LAST:event_saveButtonActionPerformed
-
-    private void setupTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_setupTableMouseClicked
-        saveButton.setEnabled(true);
-        deleteButton.setEnabled(true);
-    }//GEN-LAST:event_setupTableMouseClicked
+    }
 
     private void refreshData() {
         setupem.getTransaction().rollback();
@@ -218,6 +221,7 @@ public class SetupForm extends javax.swing.JDialog {
         setuplist.clear();
         setuplist.addAll(data);
     }
+
     /**
      * @param args the command line arguments
      */

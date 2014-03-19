@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.RollbackException;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -25,6 +28,8 @@ public class EmployeeForm extends javax.swing.JDialog implements SerialPortEvent
         if (!Beans.isDesignTime()) {
             entityManager.getTransaction().begin();
             initSerial();
+            TableColumnAdjuster tca = new TableColumnAdjuster(masterTable);
+            tca.adjustColumns();
         }
     }
 
@@ -64,6 +69,11 @@ public class EmployeeForm extends javax.swing.JDialog implements SerialPortEvent
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("DATA KARYAWAN");
         setLocationByPlatform(true);
+        setMinimumSize(new java.awt.Dimension(726, 447));
+
+        masterTable.getTableHeader().setDefaultRenderer(new MultisortTableHeaderCellRenderer());
+        masterTable.setAutoCreateRowSorter(true);
+        masterTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
 
         org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, list, masterTable, "");
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${unit}"));
@@ -169,7 +179,7 @@ public class EmployeeForm extends javax.swing.JDialog implements SerialPortEvent
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 531, Short.MAX_VALUE)
                         .addComponent(newButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(deleteButton)
@@ -192,13 +202,13 @@ public class EmployeeForm extends javax.swing.JDialog implements SerialPortEvent
                                     .addGroup(layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(nikField, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
-                                            .addComponent(namaField, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
+                                            .addComponent(nikField, javax.swing.GroupLayout.DEFAULT_SIZE, 659, Short.MAX_VALUE)
+                                            .addComponent(namaField, javax.swing.GroupLayout.DEFAULT_SIZE, 659, Short.MAX_VALUE)
                                             .addComponent(jabatanCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(reguCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                            .addComponent(masterScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)
+                            .addComponent(masterScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 706, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(rfidLabel)
                                 .addGap(24, 24, 24)
@@ -312,7 +322,7 @@ public class EmployeeForm extends javax.swing.JDialog implements SerialPortEvent
             list.addAll(merged);
         }
     }
-    
+
     private void refreshData() {
         entityManager.getTransaction().rollback();
         entityManager.getTransaction().begin();

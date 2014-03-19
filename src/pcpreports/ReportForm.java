@@ -43,8 +43,8 @@ public class ReportForm extends javax.swing.JDialog {
         if (!Beans.isDesignTime()) {
             entityManager.getTransaction().begin();
         }
-        masterTable.getColumnModel().getColumn(6).setCellRenderer(new TableCellRenderDate());
-        masterTable.getColumnModel().getColumn(7).setCellRenderer(new TableCellRenderTime());
+        masterTable.getColumnModel().getColumn(5).setCellRenderer(new TableCellRenderDate());
+        masterTable.getColumnModel().getColumn(6).setCellRenderer(new TableCellRenderTime());
         masterTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         TableColumnAdjuster tca = new TableColumnAdjuster(masterTable);
         tca.adjustColumns();
@@ -52,9 +52,8 @@ public class ReportForm extends javax.swing.JDialog {
         dtcr.setHorizontalAlignment(SwingConstants.CENTER);
         masterTable.getColumnModel().getColumn(0).setCellRenderer(dtcr);
         masterTable.getColumnModel().getColumn(1).setCellRenderer(dtcr);
-        masterTable.getColumnModel().getColumn(2).setCellRenderer(dtcr);
-        masterTable.getColumnModel().getColumn(5).setCellRenderer(dtcr);
-        masterTable.getColumnModel().getColumn(8).setCellRenderer(dtcr);
+        masterTable.getColumnModel().getColumn(4).setCellRenderer(dtcr);
+        masterTable.getColumnModel().getColumn(7).setCellRenderer(dtcr);
     }
 
     /**
@@ -92,10 +91,7 @@ public class ReportForm extends javax.swing.JDialog {
         masterTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
 
         org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, list, masterTable, "");
-        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${id}"));
-        columnBinding.setColumnName("Id");
-        columnBinding.setColumnClass(Integer.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${unit}"));
+        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${unit}"));
         columnBinding.setColumnName("Unit");
         columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${subunit}"));
@@ -247,9 +243,9 @@ public class ReportForm extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         DateFormat filedate = new SimpleDateFormat("ddMMyyyy");
-        fillData(masterTable, new File("C:\\Pcpreports\\Data\\Pcpreport" + filedate.format(new Date()) + ".xls"));
+        fillData(masterTable, new File("C:\\Pcpreports\\Data\\Pcpreport" + unit + subunit + filedate.format(new Date()) + ".xls"));
         JOptionPane.showMessageDialog(null, "Data di simpan di "
-                + "'C:\\Pcpreports\\Data\\Pcpreport.xls'", "Message",
+                + "'C:\\Pcpreports\\Data\\" + unit + subunit + filedate.format(new Date()) + ".xls'", "Message",
                 JOptionPane.INFORMATION_MESSAGE);
         setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -335,11 +331,11 @@ public class ReportForm extends javax.swing.JDialog {
             int j = 0;
             for (int i = 0; i < model.getRowCount(); i++) {
                 for (j = 0; j < model.getColumnCount(); j++) {
-                    if (j == 6) {
+                    if (j == 5) {
                         Label row = new Label(j, i + 1,
                                 datefmt.format(model.getValueAt(i, j)).toString());
                         sheet1.addCell(row);
-                    } else if (j == 7) {
+                    } else if (j == 6) {
                         Label row = new Label(j, i + 1,
                                 timefmt.format(model.getValueAt(i, j)).toString());
                         sheet1.addCell(row);
